@@ -1,8 +1,7 @@
-const req = require("express/lib/request");
 const { Pizza } = require("../models");
 
 const pizzaController = {
-  // GET all pizzas
+  // get all pizzas
   getAllPizza(req, res) {
     Pizza.find({})
       .then((dbPizzaData) => res.json(dbPizzaData))
@@ -15,7 +14,7 @@ const pizzaController = {
   getPizzaById({ params }, res) {
     Pizza.findOne({ _id: params.id })
       .then((dbPizzaData) => {
-        //if no pizza is found send 404
+        // If no pizza is found, send 404
         if (!dbPizzaData) {
           res.status(404).json({ message: "No pizza found with this id!" });
           return;
@@ -37,10 +36,10 @@ const pizzaController = {
   updatePizza({ params, body }, res) {
     // By setting the third parameter in .findOneAndUpdate to true,
     // we're instructing Mongoose to return the new version of the document.
-    Pizza.findOneAndUpdate({ id: req.params.id }, body, { new: true })
+    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
-          res.status(404).json({ message: "No pizza found with this id" });
+          res.status(404).json({ message: "No pizza found with this id!" });
           return;
         }
         res.json(dbPizzaData);
@@ -52,7 +51,7 @@ const pizzaController = {
     Pizza.findOneAndDelete({ _id: params.id })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
-          res.status(404).json({ message: "No pizza found with this id" });
+          res.status(404).json({ message: "No pizza found with this id!" });
           return;
         }
         res.json(dbPizzaData);
