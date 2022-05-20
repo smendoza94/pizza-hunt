@@ -48,7 +48,7 @@ const handlePizzaSubmit = (event) => {
   }
 
   const formData = { pizzaName, createdBy, size, toppings };
-
+  // post a new pizza object to the database
   fetch("/api/pizzas", {
     method: "POST",
     headers: {
