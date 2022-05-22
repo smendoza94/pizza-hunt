@@ -31,7 +31,7 @@ const commentController = {
     Comment.findOneAndDelete({ _id: params.commentId })
       .then((deletedComment) => {
         if (!deletedComment) {
-          return res.status(400).json({ message: "No comment with this id" });
+          return res.status(404).json({ message: "No comment with this id" });
         }
         return Pizza.findOneAndUpdate(
           { _id: params.pizzaId },
