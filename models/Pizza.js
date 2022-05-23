@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 const PizzaSchema = new Schema(
   {
@@ -11,6 +12,8 @@ const PizzaSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      // middleware function from utils/dateformat, convert to wanted format
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
     size: {
       type: String,
@@ -24,10 +27,12 @@ const PizzaSchema = new Schema(
       },
     ],
   },
-  // virtual function to use the to return the comment counts
   {
     toJSON: {
+      // virtual function to use the to return the comment counts
       virtuals: true,
+      // tell mongoose that it should use "getter" functions
+      getters: true,
     },
     // set id to false, virtual functions dont need ids
     id: false,
