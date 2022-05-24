@@ -30,6 +30,8 @@ const PizzaSchema = new Schema(
   {
     toJSON: {
       // virtual function to use the to return the comment counts
+      // virtuals help extend models by creating a "virtual" field
+      // that can be evaluated when the documents are retrieved from the database.
       virtuals: true,
       // tell mongoose that it should use "getter" functions
       getters: true,
