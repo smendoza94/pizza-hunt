@@ -64,6 +64,8 @@ const handlePizzaSubmit = (event) => {
     })
     .catch((err) => {
       console.log(err);
+      // on error to internet connection save data to IndexedDB
+      // will upload when connection is restored automatically!
       saveRecord(formData);
     });
 };
